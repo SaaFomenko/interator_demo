@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 static const unsigned int chars_size = 32;
 static const std::string fail_chars_to_int = "Ошибка ввода целого числа!";
@@ -52,6 +53,14 @@ std::vector<int> chars_to_ints(const char* chars, char divider)
     return result;
 }
 
+template <class T>
+void all_unique(T& conteiner)
+{
+    std::sort(conteiner.begin(), conteiner.end());
+    auto it = std::unique(conteiner.begin(), conteiner.end());
+    conteiner.erase(it, conteiner.end());
+}
+
 int main(int argc, char const *argv[])
 {
     const char* in_msg = "[IN]: ";
@@ -68,6 +77,9 @@ int main(int argc, char const *argv[])
     const char* chars = text.c_str();
 
     std::vector<int> arr = chars_to_ints(chars, divider);
+    //std::sort(arr.begin(), arr.end());
+    //std::unique(arr.begin(), arr.end());
+    all_unique(arr);
 
     std::cout << out_msg;
 
